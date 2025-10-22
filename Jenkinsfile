@@ -11,17 +11,12 @@ pipeline {
         stage('Run Postman Tests') {
             steps {
                 bat '''
-                chcp 65001
-                npx newman run "Contract Testing.postman_collection.json" --reporters cli,htmlextra --reporter-htmlextra-export "newman-report.html"
+                npx newman run "Contract Testing.postman_collection.json" --reporters cli,htmlextra
                 '''
             }
         }
 
-        stage('Publish Report') {
-            steps {
-                archiveArtifacts artifacts: 'newman-report.html', fingerprint: true
-            }
-        }
+        
     }
 
     post {
