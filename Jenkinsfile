@@ -11,9 +11,8 @@ pipeline {
         stage('Run Postman Tests') {
             steps {
                 bat '''
-                npx newman run "Contract Testing.postman_collection.json" ^
-                --reporters cli,htmlextra ^
-                --reporter-htmlextra-export "newman-report.html"
+                chcp 65001
+                npx newman run "Contract Testing.postman_collection.json" --reporters cli,htmlextra --reporter-htmlextra-export "newman-report.html"
                 '''
             }
         }
