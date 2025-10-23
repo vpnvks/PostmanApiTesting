@@ -17,10 +17,12 @@ pipeline {
         stage('Run Postman Collection in Docker') {
             steps {
                 script {
-                    // Run the Docker container with workspace mounted
-                    def workspacePath = "${env.WORKSPACE.replaceAll('\\\\', '/')}"
-                    sh """
-                    docker run --rm -v "${workspacePath}:/workspace" ${IMAGE_NAME} \
+                    // Convert Windows workspace path for Docker
+                    def workspacePath = env.WORKSPACE.replaceAll('\\\\', '/')
+
+                    // Run Docker using Windows batch command
+                    bat """
+                    docker run --rm -v "${workspacePath}:/workspace" ${IMAGE_NAME} ^
                     npx newman run "/workspace/${COLLECTION_FILE}"
                     """
                 }
@@ -28,4 +30,3 @@ pipeline {
         }
     }
 }
-
