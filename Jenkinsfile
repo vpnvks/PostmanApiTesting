@@ -3,7 +3,7 @@ pipeline {
 
     environment {
         IMAGE_NAME = "vpnvks01/postman-runner:latest"
-        COLLECTION_FILE = "Postman-API_collection/Contract Testing.postman_collection.json"
+        COLLECTION_FILE = "Postman-API_collection/Contract_Testing.postman_collection.json"
     }
 
     stages {
